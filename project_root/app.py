@@ -8,6 +8,9 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
 
+    #Initialize the database
+    db.init_app(app)
+
     #Register blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
