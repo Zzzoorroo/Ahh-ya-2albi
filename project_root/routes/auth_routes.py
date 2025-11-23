@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from models.user_model import User
 from models.database import db
 
@@ -24,6 +24,17 @@ def register():
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        #TODO : add athentification logic here
-        pass
+        username = request.form["username"]
+        password = request.form["password"]
+
+        #Find user
+        user = User.query.filter_by(username=username, password=password).first()
+
+        if user:
+            session["user_id"]= user.id
+            session['username'] = user.username
+            return redirect(url_for("dashboard.dashboard_home"))
+        else:
+            return render_template("login.html", error="Invalid username or password")
+        
     return render_template("login.html")
