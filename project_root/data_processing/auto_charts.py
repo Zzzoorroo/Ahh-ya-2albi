@@ -12,7 +12,7 @@ def make_chart_data(df):
     for col in numeric_cols:
         chart_list.append({
             "title": f"{col} Overview",
-            "labels": df.indec.tolist(),
+            "labels": df.index.tolist(),
             "values": df[col].fillna(0).tolist(),
         })
 

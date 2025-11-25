@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    const charts = {{ charts | tojson }};
+    const charts = {{ charts | tojson | safe }};
 
     charts.forEach((chart, index) => {
         const canvas = document.createElement("canvas");

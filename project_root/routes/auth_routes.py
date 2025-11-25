@@ -12,6 +12,9 @@ def register():
         username = request.form['username']
         password = request.form['password']
 
+        existing = User.query.filter_by(username=username).first()
+        if existing:
+            return render_template("register.html", error="Username already exists")
         new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
@@ -33,7 +36,7 @@ def login():
         if user:
             session["user_id"]= user.id
             session['username'] = user.username
-            return redirect(url_for("dashboard.dashboard_home"))
+            return redirect(url_for("dashboard.home"))
         else:
             return render_template("login.html", error="Invalid username or password")
         
