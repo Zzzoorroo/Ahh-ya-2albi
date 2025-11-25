@@ -1,0 +1,10 @@
+<ul>
+    {% for file in files %}
+    <li>
+        {{ file.filename }} — {{ file.upload_time }}
+        | <a href="/dashboard/view/{{ file.id }}">View Charts</a>
+    </li>
+    {% else %}
+    <li>No files uploaded yet.</li>
+    {% endfor %}
+</ul>

@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 dashboard_bp = Blueprint('dashboard',__name__, url_prefix="/dashboard")
 
 
+
 @dashboard_bp.route("/")
 def dashboard_home():
     if "user_id" not in session:
@@ -43,3 +44,7 @@ def view_file(file_id):
 
     #Send to frontend
     return render_template("charts.html", charts=charts, filename=file_rec.filename)
+
+@dashboard_bp.route("/upload", methods=["GET", "POST"])
+def upload_file():
+    ...
